@@ -64,3 +64,7 @@ no shutdown
 
 We should use the command ip routing before confugring this then only these confugurations will be applied.
 Without router we can achieve the inter vlan routing in this multilayer switch or layer 3 switch.
+
+
+
+There are other protocols in networking layer 2 and 3 which are yet to be explored.
