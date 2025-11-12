@@ -68,3 +68,77 @@ Without router we can achieve the inter vlan routing in this multilayer switch o
 
 
 There are other protocols in networking layer 2 and 3 which are yet to be explored.
+
+Today I have created the topology which enabled me to do the multiple networking configurations together.
+
+Created the OSPF topology in Cisco Packet Tracer using Areas 0, 1, and 2.
+Configured inter-router IP addressing
+Configured VLANs 10, 20, 30, 40, 50, and 60 in Layer 3 switches and routers.
+Configured DHCP server with dhcp pools for all VLANs.
+Verified OSPF adjacencies, LSAs, and routing tables using commands like:
+Show ip ospf neighbor
+Show ip route ospf
+Show ip ospf interface brief
+
+The problems that I have faced are
+
+OSPF area mismatch errors
+
+Verified all backbone links were in Area 0 and corrected the area configuration. After fixing, OSPF adjacency came up successfully
+
+Missing adjacency between R1–L3 Switch and R3–L3 Switch
+
+Corrected subnet masks and added proper network statements for inter-router links and VLANs. Verified adjacency using 
+
+show ip ospf neighbor
+PCs were not receiving IP addresses
+
+Forgot to add ip helper address on R2 subinterfaces for VLAN50 and VLAN60.
+
+Configured ip helper address under multiple routers. PCs in both VLANs then obtained  successfully
+
+
+
+After this corrections
+
+All routers learned inter-area routes
+
+192.168.10.0/24, 192.168.20.0/24 (Area 1)
+
+192.168.30.0/24, 192.168.40.0/24 (Area 2)
+
+192.168.50.0/24, 192.168.60.0/24 (Area 0)
+
+All VLANs received dynamic IPs from the DHCP server.
+
+DHCP relay tested via simulation mode  Discover → Offer → Request → ACK completed successfully.
+
+End-to-end connectivity verified between PCs in VLAN10, VLAN30, and VLAN60.
+
+
+
+
+
+The core commands that I have learnt today are
+
+Show ip ospf neighbour
+
+To check the neighbour routers
+Show ip route ospf 
+
+To see the routes that are learnt by ospf
+Show ip interface brief
+
+To sse the details about the interfaces and their state
+Show ip dhcp binding
+
+To see the devices that got ip and their mac and interfaces.
+
+
+Finally Understood the hierarchical design of OSPF and the role of the backbone.
+
+Gained practical experience in configuring DHCP relay agents for inter-area clients.
+
+Learned structured troubleshooting for layer 2 and layer 3 connectivity issues
+
+
